@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1>To-do-list</h1>
+        </div>
+        <div id="main" class="main">
+            
+        </div>
+        <div class="foot">
+            <div class="tasklist" style="border: none;">
+                <input minlength="3" type="text" name="taskinput" id="taskinput" class="taskinput" required="required">
+                <button type="submit" name="addtask" id="addtask" class="addtask">Add task</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const main = document.getElementById("main");
+        const completed = document.getElementsByClassName("completed");
+        const taskinput = document.getElementById("taskinput");
+        const addtask = document.getElementById("addtask");
+        let currenttask = "";
+        
+        for(let i=0;i<completed.length;i++){
+            completed[i].addEventListener("click",function(){
+                completed[i].parentNode.removeChild(completed[i]);
+            })
+        }
+
+        addtask.addEventListener("click",function(){
+            if(taskinput.value.length>3){
+                const tasklist = document.createElement("div");
+                tasklist.classList.add("tasklist");
+                const task = document.createElement("p");
+                task.classList.add("task");
+                task.innerText = taskinput.value;
+                taskinput.value = "";
+                const btn = document.createElement("button");
+                btn.innerText = "completed";
+                btn.classList.add("completed");
+
+                btn.addEventListener("click",function(){
+                tasklist.parentNode.removeChild(tasklist);
+            })
+
+                tasklist.appendChild(task);
+                tasklist.appendChild(btn);
+                main.appendChild(tasklist)
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>
